@@ -1,5 +1,6 @@
 import { useState, useEffect  , useRef} from 'react';
 import { Code, Briefcase, User, Mail, Github, Linkedin, ExternalLink, ChevronRight, Menu, X, NavigationOff, ArrowUp } from 'lucide-react';
+import axios from 'axios';
 
 export default function Portfolio() {
     const [activeSection, setActiveSection] = useState('home');
@@ -164,6 +165,14 @@ export default function Portfolio() {
     const projects = [
         {
             id: 1,
+            title: "Ai Ats Resume Filter",
+            description: "An AI-powered resume filtering system that uses natural language processing to analyze resumes and match them with job descriptions, streamlining the hiring process.",
+            tags: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "AI"],
+            image: "/ai-ats.jpg",
+            projectUrl: "https://eco-farm-connect-prototype.vercel.app/"
+        },
+        {
+            id: 2,
             title: "Eco-Farm Connect",
             description: "A full-stack e-commerce platform for local farmers to sell their waste produce directly to industires, featuring a user-friendly interface and secure payment processing.",
             tags: ["Hackathon","React", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
@@ -171,7 +180,7 @@ export default function Portfolio() {
             projectUrl: "https://eco-farm-connect-prototype.vercel.app/"
         },
         {
-            id: 2,
+            id: 3,
             title: "Hospital Management System",
             description: "A comprehensive web application for managing hospital operations, including patient records, appointment scheduling, and billing.",
             tags: ["React", "Node", "Tailwind CSS", "MongoDB"],
@@ -180,7 +189,7 @@ export default function Portfolio() {
 
         },
         {
-            id: 3,
+            id: 4,
             title: "Concrete Mx Design Calculator",
             description: "A web application for calculating concrete mix designs based on user inputs, with a focus on user experience and performance.",
             tags: ["React", "Civil Engineering", "IS-CODE", "Material Design"],
@@ -188,7 +197,7 @@ export default function Portfolio() {
             projectUrl: "https://concrete-mix-calculator-frontend.vercel.app/"
         },
         {
-            id: 4,
+            id: 5,
             title: "Code-Sync",
             description: "A platform for programmers to code on a single screen, allowing for real-time collaboration and code sharing.",
             tags: ["React", "Node.js", "Socket.io", "Tailwind CSS"],
@@ -197,7 +206,7 @@ export default function Portfolio() {
 
         },
         {
-            id: 5,
+            id: 6,
             title: "Dr Ayurveda",
             description: "An Ai powered Chatbot for Ayurvedic consultation, providing personalized health advice and remedies.",
             tags: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
@@ -206,7 +215,7 @@ export default function Portfolio() {
 
         },
         {
-            id: 6,
+            id: 7,
             title: "Growtech-Creation",
             description: "A frontend project showcasing a modern and responsive design for a tech company, built with React and Tailwind CSS.",
             tags: ["React", "Tailwind CSS", "HTML", "CSS"],
@@ -243,6 +252,29 @@ export default function Portfolio() {
             description: "HACKMOL 5.0 AND OUR PROJECT WAS OF MEDTECH THEME (DR. AYURVEDA)"
         }
     ];
+
+
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        formData.append("access_key", "9e6a0b75-21a7-478f-b9d4-2cdef6e7b395");
+
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        const res = await axios.post("https://api.web3forms.com/submit", {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: json
+        }).then((res) => res.json());
+
+        if (res.success) {
+            console.log("Success", res);
+        }
+    };
 
     return (
         <div className="bg-black text-gray-100 min-h-screen font-sans">
@@ -623,6 +655,7 @@ export default function Portfolio() {
                                         <input
                                             type="text"
                                             id="name"
+                                            name='clientName'
                                             className="w-full bg-gray-900 border border-gray-700 text-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-purple-500"
                                         />
                                     </div>
@@ -634,6 +667,7 @@ export default function Portfolio() {
                                         <input
                                             type="email"
                                             id="email"
+                                            name='clientEmail'
                                             className="w-full bg-gray-900 border border-gray-700 text-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-purple-500"
                                         />
                                     </div>
@@ -644,6 +678,7 @@ export default function Portfolio() {
                                         </label>
                                         <textarea
                                             id="message"
+                                            name='clientMessage'
                                             rows={4}
                                             className="w-full bg-gray-900 border border-gray-700 text-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-purple-500"
                                         ></textarea>
