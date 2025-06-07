@@ -169,7 +169,7 @@ export default function Portfolio() {
             description: "An AI-powered resume filtering system that uses natural language processing to analyze resumes and match them with job descriptions, streamlining the hiring process.",
             tags: ["React", "Node.js", "MongoDB", "Express", "Tailwind CSS", "AI"],
             image: "/ai-ats.jpg",
-            projectUrl: "https://eco-farm-connect-prototype.vercel.app/"
+            projectUrl: "https://ai-ats-system-qdvb.vercel.app/"
         },
         {
             id: 2,
